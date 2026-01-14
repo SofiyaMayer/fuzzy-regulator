@@ -1,0 +1,100 @@
+[System]
+Name='vehicleControllerV6b_safe'
+Type='mamdani'
+Version=2.0
+NumInputs=4
+NumOutputs=2
+NumRules=21
+AndMethod='min'
+OrMethod='max'
+ImpMethod='min'
+AggMethod='max'
+DefuzzMethod='centroid'
+
+[Input1]
+Name='vzdalenostOdSil'
+Range=[-15 15]
+NumMFs=5
+MF1='hard-':'trapmf',[-1000 -1000 -5 -2.5]
+MF2='easy-':'trimf',[-5 -2.5 -0]
+MF3='ok':'trimf',[-2 0 2]
+MF4='hard+':'trapmf',[2.5 5 1000 1000]
+MF5='easy+':'trimf',[0 2.5 5]
+
+[Input2]
+Name='uhelVuciSilnici'
+Range=[-90 90]
+NumMFs=7
+MF1='easy-':'trimf',[-29.98 -5 0]
+MF2='ok':'trimf',[-5 0 5]
+MF3='easy+':'trimf',[0 5 30]
+MF4='med-':'trimf',[-60 -29.98 -3.75]
+MF5='hard+':'trapmf',[30 60 180 180]
+MF6='med+':'trimf',[3.75 30 60]
+MF7='hard-':'trapmf',[-180 -180 -60 -29.98]
+
+[Input3]
+Name='posledniUsek'
+Range=[0 1]
+NumMFs=2
+MF1='notLast':'trapmf',[0 0 0.9 0.9]
+MF2='isLast':'trapmf',[0.9 0.9 1 1]
+
+[Input4]
+Name='rychlost'
+Range=[0 40]
+NumMFs=5
+MF1='10-':'trapmf',[-14.4 -1.6 10 15]
+MF2='20':'trimf',[15 20 25]
+MF3='30+':'trapmf',[25 30 41.6 54.4]
+MF4='15':'trimf',[10 15 20]
+MF5='25':'trimf',[20 25 30]
+
+[Output1]
+Name='volant'
+Range=[-25 25]
+NumMFs=9
+MF1='easy+':'trapmf',[0 0 5 5]
+MF2='straight':'trapmf',[-2.5 -2.5 2.5 2.5]
+MF3='easy-':'trapmf',[-5 -5 0 0]
+MF4='hard+':'trapmf',[7.5 7.5 12.5 12.5]
+MF5='med+':'trapmf',[2.5 2.5 7.5 7.5]
+MF6='med-':'trapmf',[-7.5 -7.5 -2.5 -2.5]
+MF7='hard-':'trapmf',[-12.5 -12.5 -7.5 -7.5]
+MF8='extreme+':'trapmf',[11 11 22 22]
+MF9='extreme-':'trapmf',[-22 -22 -11 -11]
+
+[Output2]
+Name='zrychleni'
+Range=[-10 10]
+NumMFs=7
+MF1='easy-':'trapmf',[-3 -3 -2 -2]
+MF2='none':'trapmf',[-0.5 -0.5 0.5 0.5]
+MF3='easy+':'trapmf',[0.5 0.5 0.7 0.7]
+MF4='med-':'trapmf',[-4.5 -4.5 -3.5 -3.5]
+MF5='med+':'trapmf',[3.5 3.5 4.5 4.5]
+MF6='hard-':'trapmf',[-10 -10 -9 -9]
+MF7='hard+':'trapmf',[7 7 8 8]
+
+[Rules]
+0 2 1 0, 2 0 (1) : 1
+0 1 1 0, 5 0 (1) : 1
+0 3 1 0, 6 0 (1) : 1
+0 4 1 0, 4 0 (1) : 1
+0 6 1 0, 7 0 (1) : 1
+0 7 1 0, 8 0 (1) : 1
+0 5 1 0, 9 0 (1) : 1
+0 0 2 0, 0 6 (1) : 1
+1 0 1 0, 8 0 (1) : 1
+4 0 1 0, 9 0 (1) : 1
+2 0 1 0, 4 0 (1) : 1
+5 0 1 0, 7 0 (1) : 1
+3 0 1 0, 2 0 (1) : 1
+0 0 1 1, 0 2 (1) : 1
+0 0 1 4, 0 2 (1) : 1
+0 0 1 2, 0 2 (1) : 1
+0 0 1 5, 0 2 (1) : 1
+0 0 1 3, 0 2 (1) : 1
+0 0 2 0, 2 0 (1) : 1
+3 2 1 1, 0 3 (1) : 1
+0 1 1 2, 0 1 (1) : 1
